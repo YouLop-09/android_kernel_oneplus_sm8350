@@ -2965,8 +2965,11 @@ static inline int __security_genfs_sid(struct selinux_policy *policy,
 	if (!genfs || cmp)
 		return -ENOENT;
 
+	pr_info("%s:%d: path=\"%s\"\n", __func__, __LINE__, path);
+
 	for (c = genfs->head; c; c = c->next) {
 		len = strlen(c->u.name);
+		pr_info("%s:%d: c->u.name(%d)=\"%s\"\n", __func__, __LINE__, len, c->u.name);
 		if ((!c->v.sclass || sclass == c->v.sclass) &&
 		    (strncmp(c->u.name, path, len) == 0))
 			break;
